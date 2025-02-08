@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
+import CardShimmer from "./CardShimmer";
 
 const Feed = () => {
   const feed = useSelector((store)=>store.feed)
@@ -22,12 +23,14 @@ const Feed = () => {
   useEffect(()=>{
     fetchFeed()
   },[])
-  return (
-    feed && (
-      <div className="flex justify-center my-4">
-        <UserCard user={feed[1]}/>
-      </div>
-    )
+  return feed ? (
+    <div className="flex justify-center my-4">
+      <UserCard user={feed[0]} />
+    </div>
+  ) : (
+    <div className="flex justify-center my-4">
+      <CardShimmer />
+    </div>
   );
 }
 

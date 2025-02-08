@@ -1,8 +1,7 @@
 const UserCard = ({user}) => {
-  console.log(user)
   const {firstName,lastName,age,about,photoURL} = user
   return (
-    <div className="card bg-base-100 w-96 shadow-sm">
+    <div className="card bg-base-300 w-64 shadow-sm">
       <figure>
         <img
           src={photoURL}
@@ -10,13 +9,11 @@ const UserCard = ({user}) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">Card Title</h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+        <h2 className="card-title">{firstName + " " +lastName}</h2>
+        <p>{about}</p>
+        <div className="card-actions justify-center">
+          <button className="btn btn-error">Ignore</button>
+          <button className="btn btn-success">Interested</button>
         </div>
       </div>
     </div>
