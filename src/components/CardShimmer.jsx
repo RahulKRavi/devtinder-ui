@@ -1,10 +1,10 @@
 const CardShimmer = () => {
   return (
-    <div className="card bg-base-300 w-64 shadow-sm">
+    <div className="card bg-base-300 w-64 shadow-sm opacity-70">
       <figure>
         <img
-          src=""
-          alt="Shoes"
+          src="https://st.depositphotos.com/25790974/61426/v/450/depositphotos_614265050-stock-illustration-gym-logo-vector-flat-design.jpg"
+          alt="Profile Image"
         />
       </figure>
       <div className="card-body">

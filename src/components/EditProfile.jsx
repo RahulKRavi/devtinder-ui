@@ -2,30 +2,32 @@ import axios from "axios"
 import { useState } from "react"
 import { BASE_URL } from "../utils/constants"
 import { useDispatch } from "react-redux"
+import UserCard from "./UserCard"
+import { addUser } from "../utils/userSlice";
 
 const EditProfile = ({user}) => {
-  const [firstName, setFirstName] = useState(user.firstName)
-  const [lastName, setLastName] = useState(user.lastName)
-  const [photoURL, setPhotoURL] = useState(user.photoURL)
+  const [firstName, setFirstName] = useState(user.firstName || '')
+  const [lastName, setLastName] = useState(user.lastName || '')
+  const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const dispatch = useDispatch()
-
   const handleUpdate = async () => {
     try {
-      const res = await axios.patch(BASE_URL + '/profile/edit', {
-        firstName,lastName,photoURL
-      },
-      {
-        withCredentials: true
-      })
-      dispatch(res?.data.data)
+      const res = await axios.patch(BASE_URL + '/profile/edit', 
+        {
+          firstName,lastName,photoURL
+        },
+        {
+          withCredentials: true
+        })
+      dispatch(addUser(res?.data?.data))
     } catch (err) {
-      
+      console.error(err.message)
     }
   }
 
   return (
     <div className="flex justify-center">
-      <div className="card w-96 bg-base-300 shadow-sm my-14">
+      <div className="card w-96 bg-base-300 shadow-sm my-14 mx-5">
         <div className="card-body">
           <div className="flex justify-center">
             <h2 className="text-3xl font-bold">Profile</h2>
@@ -63,8 +65,11 @@ const EditProfile = ({user}) => {
           </div>
         </div>
       </div>
+      <div className="card bg-base-300 shadow-sm my-14 mx-5">
+        <UserCard user={user}></UserCard>
+      </div>
     </div>
-  )
+  );
 }
 
 export default EditProfile

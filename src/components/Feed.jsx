@@ -10,7 +10,6 @@ const Feed = () => {
   const feed = useSelector((store)=>store.feed)
   const dispatch  = useDispatch();
   const fetchFeed = async () => {
-    if(feed) return;
     try {
       const res = await axios.get(BASE_URL + '/user/feeds',{
         withCredentials:true
@@ -23,13 +22,14 @@ const Feed = () => {
   useEffect(()=>{
     fetchFeed()
   },[])
-  return feed ? (
-    <div className="flex justify-center my-4">
-      <UserCard user={feed[0]} />
-    </div>
-  ) : (
-    <div className="flex justify-center my-4">
+  return !feed ? (
+    <div className="flex justify-center my-4 min-h-screen">
       <CardShimmer />
+    </div>
+  ) : feed.length == 0 ? (<div className="min-h-screen flex justify-center text-center text-4xl mt-14">No New Users Found Found</div>): 
+  (
+    <div className="flex justify-center my-4 min-h-screen">
+      <UserCard user={feed[0]} />
     </div>
   );
 }

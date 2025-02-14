@@ -25,8 +25,8 @@ const Login = () => {
           {
             withCredentials: true
           })
-          dispatch(addUser(res.data))
-          navigate('/')
+          dispatch(addUser(res?.data?.data))
+          navigate('/feed')
       } else {
         const res = await axios.post(
           BASE_URL + '/signup',
@@ -37,7 +37,7 @@ const Login = () => {
             withCredentials: true
           })
           dispatch(addUser(res?.data?.data))
-          navigate('/profile/view')
+          navigate('/profile')
       }
     } catch (err) {
       console.error(err.message)

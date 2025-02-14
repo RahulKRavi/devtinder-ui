@@ -19,10 +19,10 @@ const Body = () => {
         BASE_URL + '/profile/view',{
           withCredentials: true
         })
-        dispatch(addUser(res.data))
+        dispatch(addUser(res?.data?.data))
     } catch (err) {
       if(err.status===401){
-        navigate('/login')
+        navigate('/')
       }
       console.error(err.message)
     }

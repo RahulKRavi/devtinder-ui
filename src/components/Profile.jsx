@@ -3,7 +3,13 @@ import EditProfile from "./EditProfile"
 
 const Profile = () => {
   const user = useSelector(store=>store.user)
-  return user && <EditProfile user={user} />;
+  return (
+    user ?  (
+      <div className="min-h-screen">
+        <EditProfile user={user} />
+      </div>
+    ) : (<>Loading</>)
+  );
 }
 
 export default Profile
